@@ -28,7 +28,6 @@ getPromise()
   });
 
 //   using fetch API
-
 function getTodo() {
   fetch("https://jsonplaceholder.typicode.com/todos/1")
     .then((response) => {
@@ -43,3 +42,25 @@ function getTodo() {
 }
 
 getTodo();
+
+// using async await
+const getTodoUsingAsync = async () => {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/todosss/5"
+  );
+
+  if (response.status !== 200) {
+    throw new Error("Failed to get todo using async");
+  }
+
+  const data = await response.json();
+  return data;
+};
+
+getTodoUsingAsync()
+  .then((data) => {
+    console.log("Get todo using async: ", data);
+  })
+  .catch((err) => {
+    console.log("Rejected:", err.message);
+  });
